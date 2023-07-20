@@ -1,0 +1,213 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/reservation":
+    post:
+      summary: Creates a reservation
+      tags:
+      - Reservations
+      parameters: []
+      responses:
+        '201':
+          description: Reservation created
+        '406':
+          description: Reservation not created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                laptop_id:
+                  type: integer
+                city:
+                  type: string
+                date:
+                  type: string
+                hour:
+                  type: string
+              required:
+              - user_id
+              - laptop_id
+              - city
+              - date
+              - hour
+  "/api/v1/reservation/{id}":
+    delete:
+      summary: Deletes a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Reservation deleted
+        '404':
+          description: Reservation not found
+  "/api/v1/laptops":
+    post:
+      summary: Creates a laptop
+      tags:
+      - Laptops
+      parameters: []
+      responses:
+        '201':
+          description: Laptop has been created successfully!
+        '406':
+          description: Something went wrong.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+                photo_url:
+                  type: string
+                description:
+                  type: text
+                model_year:
+                  type: integer
+                price:
+                  type: integer
+                rom_size:
+                  type: string
+                ram_size:
+                  type: string
+              required:
+              - name
+              - model_year
+              - photo_url
+              - price
+              - rom_size
+              - ram_size
+    get:
+      summary: Retrieves Laptops
+      tags:
+      - Laptops
+      responses:
+        '200':
+          description: Laptops found
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  name:
+                  type: string
+                description:
+                  type: text
+                photo_url:
+                  type: string
+                description:
+                  type: text
+                model_year:
+                  type: integer
+                price:
+                  type: integer
+                rom_size:
+                  type: string
+                ram_size:
+                  type: string
+              required:
+              - name
+              - model_year
+              - photo_url
+              - price
+              - rom_size
+              - ram_size
+  "/api/v1/laptops/{id}":
+    delete:
+      summary: Destroy a laptop
+      tags:
+      - Laptops
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Laptop has been destroyed successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                  type: string
+                description:
+                  type: text
+                photo_url:
+                  type: string
+                description:
+                  type: text
+                model_year:
+                  type: integer
+                price:
+                  type: integer
+                rom_size:
+                  type: string
+                ram_size:
+                  type: string
+                  
+  "/api/v1/signup":
+    post:
+      summary: Creates an user
+      tags:
+      - Users Signup
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '406':
+          description: Not acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+  "/api/v1/login":
+    post:
+      summary: Logs in an user
+      tags:
+      - Users Login
+      parameters: []
+      responses:
+        '200':
+          description: Logged in
+        '404':
+          description: Not acceptable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
